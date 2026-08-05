@@ -15,3 +15,6 @@ spring:
         format_sql: true
     open-in-view: false
     show-sql: true
+  web:
+    locale: en
+    locale-resolver: fixed
