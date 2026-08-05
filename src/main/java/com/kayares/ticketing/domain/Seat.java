@@ -2,6 +2,7 @@ package com.kayares.ticketing.domain;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
@@ -11,6 +12,7 @@ import lombok.NoArgsConstructor;
                 columnNames = {"venue_id", "row_no", "col_no"}
         )
 })
+@Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Seat {
 

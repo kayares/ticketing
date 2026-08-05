@@ -2,6 +2,7 @@ package com.kayares.ticketing.domain;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
@@ -13,6 +14,7 @@ import java.time.LocalDateTime;
                 columnNames = {"venue_id", "start_at"}
         )
 })
+@Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Showing {
     @Id

@@ -2,6 +2,7 @@ package com.kayares.ticketing.domain;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
@@ -13,6 +14,7 @@ import java.math.BigDecimal;
                 columnNames = {"showing_id", "seat_id"}
         )
 })
+@Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class ShowSeat {
     @Id
