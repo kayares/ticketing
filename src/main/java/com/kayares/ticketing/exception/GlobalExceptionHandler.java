@@ -13,19 +13,23 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(VenueNotFoundException.class)
     public ResponseEntity<ErrorResponse> handleVenueNotFound(VenueNotFoundException e) {
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
-                new ErrorResponse("VENUE_NOT_FOUND", e.getMessage())
-        );
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body(new ErrorResponse("VENUE_NOT_FOUND", e.getMessage()));
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ErrorResponse> handleMethodArgumentNotValid(MethodArgumentNotValidException e) {
-        String message = e.getBindingResult().getFieldErrors().stream().map(
-                fieldError -> fieldError.getField() + " " + fieldError.getDefaultMessage()
-        ).collect(Collectors.joining(", "));
+        String message = e.getBindingResult().getFieldErrors().stream()
+                .map(fieldError -> fieldError.getField() + " " + fieldError.getDefaultMessage())
+                .collect(Collectors.joining(", "));
 
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
-                new ErrorResponse("INVALID_INPUT", message)
-        );
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body(new ErrorResponse("INVALID_INPUT", message));
+    }
+
+    @ExceptionHandler(DuplicateUsernameException.class)
+    public ResponseEntity<ErrorResponse> handleDuplicateUsername(DuplicateUsernameException e) {
+        return ResponseEntity.status(HttpStatus.CONFLICT)
+                .body(new ErrorResponse("DUPLICATE_USERNAME", e.getMessage()));
     }
 }
