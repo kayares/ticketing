@@ -5,8 +5,6 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.math.BigDecimal;
-
 @Entity
 @Table(uniqueConstraints = {
         @UniqueConstraint(
@@ -33,16 +31,12 @@ public class ShowSeat {
     @Enumerated(EnumType.STRING)
     private SeatStatus status;
 
-    @Column(nullable = false, precision = 10, scale = 0)
-    private BigDecimal price;
-
     @Version
     private int version;
 
-    public ShowSeat(Showing showing, Seat seat, BigDecimal price) {
+    public ShowSeat(Showing showing, Seat seat) {
         this.showing = showing;
         this.seat = seat;
-        this.price = price;
         this.status = SeatStatus.AVAILABLE;
     }
 }
