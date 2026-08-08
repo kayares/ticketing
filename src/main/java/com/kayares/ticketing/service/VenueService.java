@@ -28,8 +28,9 @@ public class VenueService {
         
         List<Seat> seats = new ArrayList<>();
         for (int rowNo = 1; rowNo <= rowCount; rowNo++) {
+            Grade grade = Grade.values()[(rowNo - 1) * Grade.COUNT / rowCount];
             for (int colNo = 1; colNo <= colCount; colNo++) {
-                seats.add(new Seat(venue, rowNo, colNo, Grade.defaultGrade()));
+                seats.add(new Seat(venue, rowNo, colNo, grade));
             }
         }
         seatRepository.saveAll(seats);

@@ -1,14 +1,12 @@
 package com.kayares.ticketing.dto;
 
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Positive;
+import com.kayares.ticketing.domain.Grade;
+import jakarta.validation.constraints.*;
 
 public record VenueCreateRequest(
         @NotBlank String name,
         @NotBlank String address,
-        @NotNull @Positive @Max(100) Integer rowCount,
-        @NotNull @Positive @Max(100) Integer colCount
+        @NotNull @Min(Grade.COUNT) @Max(100) Integer rowCount,
+        @NotNull @Min(1) @Max(100) Integer colCount
 ) {
 }
