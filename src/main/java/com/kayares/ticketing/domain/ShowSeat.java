@@ -31,9 +31,6 @@ public class ShowSeat {
     @Enumerated(EnumType.STRING)
     private SeatStatus status;
 
-    @Version
-    private int version;
-
     public ShowSeat(Showing showing, Seat seat) {
         this.showing = showing;
         this.seat = seat;
