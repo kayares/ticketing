@@ -1,5 +1,5 @@
 package com.kayares.ticketing.domain;
 
-public enum SeatStatus {
+public enum ShowSeatStatus {
     AVAILABLE, HELD, SOLD
 }
