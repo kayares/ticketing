@@ -33,7 +33,7 @@ public class Reservation {
     public Reservation(User user, ShowSeat showSeat) {
         this.user = user;
         this.showSeat = showSeat;
-        this.status = ReservationStatus.PENDING;
+        this.status = ReservationStatus.CONFIRMED;
     }
 
     @PrePersist

@@ -29,11 +29,15 @@ public class ShowSeat {
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private SeatStatus status;
+    private ShowSeatStatus status;
 
     public ShowSeat(Showing showing, Seat seat) {
         this.showing = showing;
         this.seat = seat;
-        this.status = SeatStatus.AVAILABLE;
+        this.status = ShowSeatStatus.AVAILABLE;
+    }
+
+    public void markAsSold() {
+        this.status = ShowSeatStatus.SOLD;
     }
 }

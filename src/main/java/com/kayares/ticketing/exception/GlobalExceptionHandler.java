@@ -32,4 +32,22 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.CONFLICT)
                 .body(new ErrorResponse("DUPLICATE_USERNAME", e.getMessage()));
     }
+
+    @ExceptionHandler(UserNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleUserNotFound(UserNotFoundException e) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body(new ErrorResponse("USER_NOT_FOUND", e.getMessage()));
+    }
+
+    @ExceptionHandler(ShowSeatNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleShowSeatNotFound(ShowSeatNotFoundException e) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body(new ErrorResponse("SHOW_SEAT_NOT_FOUND", e.getMessage()));
+    }
+
+    @ExceptionHandler(ShowSeatNotAvailableException.class)
+    public ResponseEntity<ErrorResponse> handleShowSeatNotAvailable(ShowSeatNotAvailableException e) {
+        return ResponseEntity.status(HttpStatus.CONFLICT)
+                .body(new ErrorResponse("SHOW_SEAT_NOT_AVAILABLE", e.getMessage()));
+    }
 }
