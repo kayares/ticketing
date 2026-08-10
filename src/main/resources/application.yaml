@@ -2,11 +2,10 @@ spring:
   application:
     name: ticketing
   datasource:
-    url: jdbc:h2:mem:ticketing
-    username: sa
-  h2:
-    console:
-      enabled: true
+    url: jdbc:mysql://localhost:3307/ticketing
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
       ddl-auto: create
