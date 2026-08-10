@@ -15,19 +15,21 @@ ShowSeat에 두면 회차별로 상태가 독립적으로 관리된다.
 Showing을 만들 때 ShowSeat을 AVAILABLE 상태로 미리 행을 생성하여 table에 넣어 둔다.
 락은 원래 있던 행들을 잠가 변경하지 못하게 하는데,
 잠글 행이 없으면 락을 걸 수 없다.
-행을 미리 만들지 않으면 100명이 동시에 같은 좌석을 조회했을 때
-전부 예매 가능하다 판단하고 INSERT를 시도한다.
-그 결과 한 좌석이 여러 명에게 팔린다.
 미리 만들어 두면 예매가 기존 행의 status를
-AVAILABLE에서 HELD로 바꾸는 UPDATE가 되어 락이 동작한다.
+AVAILABLE에서 SOLD로 바꾸는 UPDATE가 되어 락이 동작한다.
 
 ## Reservation에 unique 제약이 없는 이유
 2026-08-04
 
+unique 제약을 쓰려면 어떤 경우에서도 중복이 존재해서는 안 되는 경우이다.
+ShowSeat의 경우 Showing과 Seat이 조합이 중복되는 경우가 존재해서는 안 되기에 unique를 쓴다.
 Reservation은 ShowSeat과 User를 매치시키는 Entity라 1:1처럼 보이지만 그건 SOLD 한정에서이다.
 실제로는 Reservation이 삭제되지 않고 상태가 CANCELED로 바뀌고 이력이 남는다.
-unique로 제약을 걸면 그 행이 자리를 차지하고 있어서 다른 유저에게 INSERT를 할 수 없게 된다.
-unique는 방어 수단으로 쓰지 않고, 락으로 방어한다.
+따라서 CANCELED된 Reservation까지 포함하여 unique로 제약을 걸면
+그 행이 자리를 차지하고 있어서 Reservation이 예약 가능하다 해도 다른 유저에게 INSERT를 할 수 없게 된다.
+고로 unique 제약을 걸지 않는다.
+`feat: add reservation creation API without lock` 커밋 시점에는 중복 예약을 막는 장치가 없다.
+그게 oversold 측정의 조건이고, 이후 락으로 막을 것이다.
 
 ## Venue 생성 시 좌석을 함께 생성한 이유
 2026-08-06
